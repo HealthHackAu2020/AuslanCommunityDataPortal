@@ -10,7 +10,7 @@ export default function App({ Component, pageProps }) {
       </Head>
 
       {/* Page Render and Providers */}
-      <div className="font-base tracking-normal leading-normal">
+      <div className="font-base tracking-normal leading-normal bg-gray-200 min-h-screen">
         <Component {...pageProps} />
       </div>
     </>

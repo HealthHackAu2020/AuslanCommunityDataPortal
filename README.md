@@ -14,3 +14,7 @@ Once running, the Admin UI is reachable via `http://localhost:3000/admin`.
 
 - You can access the GraphQL API (`http://localhost:3000/admin/graphiql`).
 - You can access the UI (`http://localhost:3000`);
+
+## Attributions
+
+- Some hand-sign icons used from [Vitaly Gorbachev](https://www.flaticon.com/packs/deaf-alphabet-3)
