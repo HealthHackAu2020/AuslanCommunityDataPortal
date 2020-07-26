@@ -1,0 +1,40 @@
+{
+  "name": "auslan",
+  "description": "Auslan Community Portal",
+  "private": true,
+  "version": "0.0.1",
+  "author": "Chris A James (chris@webglowit.net)",
+  "repository": "",
+  "homepage": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development DISABLE_LOGGING=true keystone dev",
+    "build": "cross-env NODE_ENV=production keystone build",
+    "start": "cross-env NODE_ENV=production keystone start",
+    "create-tables": "cross-env CREATE_TABLES=true keystone create-tables"
+  },
+  "dependencies": {
+    "@keystonejs/adapter-mongoose": "^9.0.0",
+    "@keystonejs/app-admin-ui": "^7.1.0",
+    "@keystonejs/app-graphql": "^6.0.0",
+    "@keystonejs/app-next": "^5.2.0",
+    "@keystonejs/auth-password": "^5.1.11",
+    "@keystonejs/email": "^5.1.5",
+    "@keystonejs/fields": "^14.0.0",
+    "@keystonejs/fields-wysiwyg-tinymce": "^5.3.3",
+    "@keystonejs/file-adapters": "^7.0.2",
+    "@keystonejs/keystone": "^12.0.0",
+    "cross-env": "^7.0.0",
+    "dotenv": "^8.2.0",
+    "evergreen-ui": "^4.28.1",
+    "next": "^9.4.4",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "tailwindcss": "^1.5.2"
+  }
+}
