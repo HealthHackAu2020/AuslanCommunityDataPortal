@@ -1,6 +1,7 @@
-export default ({ className }) => (
+import clsx from "clsx";
+export const SignHello = ({ className }) => (
   <svg
-    className={className ? className : ""}
+    className={clsx(className)}
     viewBox="0 0 512.044 512.044"
     xmlns="http://www.w3.org/2000/svg"
   >

@@ -1,4 +1,3 @@
-import React from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { SignHello } from "components/icons/SignHello";
@@ -6,11 +5,11 @@ import { TextInput } from "components/TextInput";
 import { Button } from "components/Button";
 import { ALink } from "components/ALink";
 
-export default function Home() {
+export default function SignUp() {
   return (
     <>
       <Head>
-        <title>Login | Auslan Community Portal</title>
+        <title>Sign Up | Auslan Community Portal</title>
       </Head>
 
       <div className="mx-auto container h-screen max-w-md flex flex-col items-center justify-center">
@@ -22,11 +21,17 @@ export default function Home() {
           </div>
           {/* Login Form */}
           <div className="my-4 px-4 flex flex-col items-center space-y-2">
-            <TextInput name="email" placeholder="Email" />
+            <TextInput name="email" placeholder="Email address" />
+            <TextInput name="name" placeholder="Full name" />
             <TextInput name="password" type="password" placeholder="Password" />
-            <Button className="w-full">Log In</Button>
-            <Link href="/signup">
-              <ALink>Haven't got an account? Sign up!</ALink>
+            <TextInput
+              name="password_repeat"
+              type="password"
+              placeholder="Repeat password"
+            />
+            <Button className="w-full">Register</Button>
+            <Link href="/login">
+              <ALink>Got an account? Log in!</ALink>
             </Link>
           </div>
         </div>
