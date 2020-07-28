@@ -18,7 +18,7 @@ const { Wysiwyg } = require("@keystonejs/fields-wysiwyg-tinymce");
 // const isDev = process.env.NODE_ENV !== "production";
 
 const fileAdapter = new LocalFileAdapter({
-  src: "./uploads",
+  src: "./app/public/uploads",
 });
 
 // Access control functions
