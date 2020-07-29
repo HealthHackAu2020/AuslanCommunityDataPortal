@@ -1,4 +1,36 @@
-export const Button = ({ className, color, children, ...props }) => {
+import React from "react";
+
+export const Button = React.forwardRef(
+  ({ className, color, children, ...props }, ref) => {
+    let { textClass, typeClass } = buttonColorClass(color);
+    return (
+      <button
+        ref={ref}
+        className={`py-4 px-6 border rounded-full outline-none transition duration-75 focus:shadow-outline ${textClass} ${typeClass} ${className}`}
+        {...props}
+      >
+        {children}
+      </button>
+    );
+  }
+);
+
+export const Submit = React.forwardRef(
+  ({ className, color, value, ...props }, ref) => {
+    let { textClass, typeClass } = buttonColorClass(color);
+    return (
+      <input
+        ref={ref}
+        type="submit"
+        className={`py-4 px-6 border rounded-full outline-none transition duration-75 focus:shadow-outline ${textClass} ${typeClass} ${className}`}
+        value={value}
+        {...props}
+      />
+    );
+  }
+);
+
+const buttonColorClass = (color) => {
   let typeClass = "";
   let textClass = "text-white";
   switch (color) {
@@ -10,12 +42,5 @@ export const Button = ({ className, color, children, ...props }) => {
     default:
       typeClass = "bg-purple-700 hover:bg-purple-800";
   }
-  return (
-    <button
-      className={`py-4 px-6 border rounded-full outline-none transition duration-75 focus:shadow-outline ${textClass} ${typeClass} ${className}`}
-      {...props}
-    >
-      {children}
-    </button>
-  );
+  return { textClass, typeClass };
 };

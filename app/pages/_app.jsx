@@ -1,5 +1,7 @@
 import "../styles/tailwind.css";
 import Head from "next/head";
+import { DataProvider } from "providers/data";
+import { AuthProvider } from "providers/auth";
 
 export default function App({ Component, pageProps }) {
   return (
@@ -14,9 +16,13 @@ export default function App({ Component, pageProps }) {
       </Head>
 
       {/* Page Render and Providers */}
-      <div className="font-base font-sans tracking-normal leading-normal bg-gray-200 min-h-screen">
-        <Component {...pageProps} />
-      </div>
+      <DataProvider>
+        <AuthProvider>
+          <div className="font-base font-sans tracking-normal leading-normal bg-gray-200 min-h-screen">
+            <Component {...pageProps} />
+          </div>
+        </AuthProvider>
+      </DataProvider>
     </>
   );
 }

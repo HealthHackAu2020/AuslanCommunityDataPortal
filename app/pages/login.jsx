@@ -1,12 +1,26 @@
 import React from "react";
 import Head from "next/head";
-import Link from "next/link";
+import { useForm } from "react-hook-form";
 import { SignHello } from "components/icons/SignHello";
 import { TextInput } from "components/TextInput";
-import { Button } from "components/Button";
-import { ALink } from "components/ALink";
+import { Submit } from "components/Button";
+import { Link } from "components/Link";
+import { useAuth } from "providers/auth";
 
-export default function Home() {
+export default function Login() {
+  const { register, handleSubmit, errors, setError } = useForm();
+  const { authenticateUser } = useAuth();
+  const onSubmit = async ({ email, password }) => {
+    try {
+      // Call auth hook
+      await authenticateUser(email, password);
+    } catch (error) {
+      setError("password", {
+        type: "manual",
+      });
+    }
+  };
+
   return (
     <>
       <Head>
@@ -21,14 +35,30 @@ export default function Home() {
             <span className="text-xl font-bold">Auslan Community Portal</span>
           </div>
           {/* Login Form */}
-          <div className="my-4 px-4 flex flex-col items-center space-y-2">
-            <TextInput name="email" placeholder="Email" />
-            <TextInput name="password" type="password" placeholder="Password" />
-            <Button className="w-full">Log In</Button>
-            <Link href="/signup">
-              <ALink>Haven't got an account? Sign up!</ALink>
-            </Link>
-          </div>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="my-4 px-4 flex flex-col items-center space-y-2"
+          >
+            <TextInput
+              name="email"
+              placeholder="Email"
+              ref={register({ required: true })}
+              errors={{ "This field is required": errors.email }}
+            />
+            <TextInput
+              name="password"
+              type="password"
+              placeholder="Password"
+              ref={register({ required: true })}
+              errors={{
+                "That username and password are invalid":
+                  errors.password && errors.password.type === "manual",
+                "This field is required": errors.password,
+              }}
+            />
+            <Submit className="w-full" value="Log In" />
+            <Link href="/signup">Haven't got an account? Sign up!</Link>
+          </form>
         </div>
       </div>
     </>

@@ -1,8 +1,5 @@
 import Head from "next/head";
-import Link from "next/link";
-import { TextInput } from "components/TextInput";
 import { Button } from "components/Button";
-import { ALink } from "components/ALink";
 import { H1 } from "components/Header";
 import { Select } from "components/Select";
 

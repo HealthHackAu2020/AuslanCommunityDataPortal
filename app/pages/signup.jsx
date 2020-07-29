@@ -1,9 +1,8 @@
 import Head from "next/head";
-import Link from "next/link";
 import { SignHello } from "components/icons/SignHello";
 import { TextInput } from "components/TextInput";
 import { Button } from "components/Button";
-import { ALink } from "components/ALink";
+import { Link } from "components/Link";
 
 export default function SignUp() {
   return (
@@ -30,9 +29,7 @@ export default function SignUp() {
               placeholder="Repeat password"
             />
             <Button className="w-full">Register</Button>
-            <Link href="/login">
-              <ALink>Got an account? Log in!</ALink>
-            </Link>
+            <Link href="/login">Got an account? Log in!</Link>
           </div>
         </div>
       </div>
