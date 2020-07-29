@@ -17,11 +17,14 @@ export const DataProvider = ({ children }) => {
   const fetcher = async (...args) => client.request(...args);
 
   const updateClientWithToken = (token) => {
-    const newClient = new GraphQLClient(GQL_ENDPOINT, {
-      headers: {
-        Authorization: token ? `Bearer ${token}` : undefined,
-      },
-    });
+    const authHeader = token
+      ? {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      : undefined;
+    const newClient = new GraphQLClient(GQL_ENDPOINT, authHeader);
     setClient(newClient);
   };
 

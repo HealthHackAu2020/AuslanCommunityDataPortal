@@ -4,6 +4,7 @@ import { useData } from "./data";
 import gql from "graphql-tag";
 import { useRouter } from "next/router";
 import { printGraphql } from "utils/gql";
+import { Loader } from "components/icons/Loader";
 
 // Auth Context
 export const AuthContext = React.createContext(null);
@@ -101,6 +102,16 @@ export const AuthProvider = ({ children }) => {
       router.replace(loginPage);
     }
   };
+
+  const isLoginPage = () => router.pathname === "/login";
+
+  if (!user && !isLoginPage()) {
+    return (
+      <div className="h-screen w-screen flex items-center justify-center">
+        <Loader className="h-20 w-20" />
+      </div>
+    );
+  }
 
   return (
     <AuthContext.Provider

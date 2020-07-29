@@ -16,13 +16,13 @@ export default function App({ Component, pageProps }) {
       </Head>
 
       {/* Page Render and Providers */}
-      <DataProvider>
-        <AuthProvider>
-          <div className="font-base font-sans tracking-normal leading-normal bg-gray-200 min-h-screen">
+      <div className="font-base font-sans tracking-normal leading-normal bg-gray-200 min-h-screen">
+        <DataProvider>
+          <AuthProvider>
             <Component {...pageProps} />
-          </div>
-        </AuthProvider>
-      </DataProvider>
+          </AuthProvider>
+        </DataProvider>
+      </div>
     </>
   );
 }

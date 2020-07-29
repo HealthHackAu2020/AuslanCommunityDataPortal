@@ -54,6 +54,7 @@ exports.User = {
   // List-level access controls
   access: {
     ...DEFAULT_LIST_ACCESS,
+    create: true,
     auth: true,
   },
   fields: {
@@ -67,6 +68,7 @@ exports.User = {
       // Field-level access controls
       // Here, we set more restrictive field access so a non-admin cannot make themselves admin.
       access: {
+        create: access.userIsAdmin,
         update: access.userIsAdmin,
       },
     },
