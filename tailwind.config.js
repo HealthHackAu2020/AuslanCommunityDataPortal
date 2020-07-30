@@ -16,6 +16,11 @@ module.exports = {
           "Noto Color Emoji",
         ],
       },
+      spacing: {
+        "1x1": "100%",
+        "3x2": "calc((2/3) * 100)%",
+        "16x9": "calc((9/16) * 100)%",
+      },
     },
   },
   variants: {},
