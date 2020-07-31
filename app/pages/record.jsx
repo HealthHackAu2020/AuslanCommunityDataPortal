@@ -7,12 +7,13 @@ import { TextInput } from "components/TextInput";
 import { useForm } from "react-hook-form";
 import { Submit } from "components/Button";
 import gql from "graphql-tag";
-import { useData } from "providers/data";
 import { printGraphql } from "utils/gql";
 
+import { useMutation } from "graphql-hooks";
+
 const createVideoMutation = gql`
-  mutation CreateVideoMutation($translation: String) {
-    createVideo(data: { translation: $translation }) {
+  mutation CreateVideoMutation($translation: String, $file: Upload!) {
+    createVideo(data: { translation: $translation, file: $file }) {
       id
       translation
     }
@@ -25,7 +26,6 @@ export default () => {
   const [file, setFile] = useState(null);
 
   const { handleSubmit, register, errors } = useForm();
-  const { client } = useData();
 
   const captureCamera = async () => {
     try {
@@ -35,6 +35,8 @@ export default () => {
       throw error;
     }
   };
+
+  const [createVideo] = useMutation(printGraphql(createVideoMutation));
 
   const startRecording = async () => {
     const camera = await captureCamera();
@@ -75,13 +77,16 @@ export default () => {
   };
 
   const onSubmit = async (values) => {
-    // const localFile = new File([file], "video.webm");
     console.log({ values, file });
-    const request = await client.request(printGraphql(createVideoMutation), {
-      translation: values.translation,
-      file: values.file,
+    file.name = "video.webm";
+    const video = await createVideo({
+      variables: {
+        translation: values.translation,
+        file,
+      },
     });
-    debugger;
+
+    console.log({ video });
   };
 
   return (
@@ -113,7 +118,6 @@ export default () => {
             ref={register}
             placeholder="Translation"
           />
-          <input type="file" ref={register} name="file" />
           <Submit value="Submit" />
         </form>
       </div>

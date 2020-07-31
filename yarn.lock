@@ -5425,6 +5425,11 @@ deprecated-decorator@^0.1.6:
   resolved "https://registry.yarnpkg.com/deprecated-decorator/-/deprecated-decorator-0.1.6.tgz#00966317b7a12fe92f3cc831f7583af329b86c37"
   integrity sha1-AJZjF7ehL+kvPMgx91g68ym4bDc=
 
+dequal@^1.0.0:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/dequal/-/dequal-1.0.1.tgz#dbbf9795ec626e9da8bd68782f4add1d23700d8b"
+  integrity sha512-Fx8jxibzkJX2aJgyfSdLhr9tlRoTnHKrRJuu2XHlAgKioN2j19/Bcbe0d4mFXYZ3+wpE2KVobUVTfDutcD17xQ==
+
 des.js@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/des.js/-/des.js-1.0.1.tgz#5382142e1bdc53f85d86d53e5f4aa7deb91e0843"
@@ -6650,6 +6655,14 @@ graphql-extensions@^0.12.4:
     "@apollographql/apollo-tools" "^0.4.3"
     apollo-server-env "^2.4.5"
     apollo-server-types "^0.5.1"
+
+graphql-hooks@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/graphql-hooks/-/graphql-hooks-4.5.0.tgz#dbabbf996671321e703d9ed29374a1ee2c38ed43"
+  integrity sha512-xwOHJssNrcS9RWQz8nTEY2SBXzMWE6GcoAgN8A1tPwQI0VBFKcRtpK2XAm7+g34bF6uJuJl5QP9bSZy0F9BN6w==
+  dependencies:
+    dequal "^1.0.0"
+    extract-files "^8.0.0"
 
 graphql-import@^0.4.4:
   version "0.4.5"

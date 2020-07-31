@@ -1,6 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { SWRConfig } from "swr";
 import { GraphQLClient } from "graphql-request";
+import { GraphQLClient as HkGQLClient, ClientContext } from "graphql-hooks";
 
 // Data Context
 export const DataContext = React.createContext(null);
@@ -14,6 +15,10 @@ export const DataProvider = ({ children }) => {
   // Initialise the Data Providers
   const [client, setClient] = useState(new GraphQLClient(GQL_ENDPOINT));
 
+  const hkClient = new HkGQLClient({
+    url: GQL_ENDPOINT,
+  });
+
   const fetcher = async (...args) => client.request(...args);
 
   const updateClientWithToken = (token) => {
@@ -24,24 +29,33 @@ export const DataProvider = ({ children }) => {
           },
         }
       : undefined;
+
+    if (token) {
+      hkClient.setHeader("Authorization", `Bearer ${token}`);
+    } else {
+      hkClient.removeHeader("Authorization");
+    }
+
     const newClient = new GraphQLClient(GQL_ENDPOINT, authHeader);
     setClient(newClient);
   };
 
   return (
-    <DataContext.Provider
-      value={{
-        client,
-        updateClientWithToken,
-      }}
-    >
-      <SWRConfig
+    <ClientContext.Provider value={hkClient}>
+      <DataContext.Provider
         value={{
-          fetcher,
+          client,
+          updateClientWithToken,
         }}
       >
-        {children}
-      </SWRConfig>
-    </DataContext.Provider>
+        <SWRConfig
+          value={{
+            fetcher,
+          }}
+        >
+          {children}
+        </SWRConfig>
+      </DataContext.Provider>
+    </ClientContext.Provider>
   );
 };
