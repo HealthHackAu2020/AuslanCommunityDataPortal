@@ -19,6 +19,7 @@ const { Wysiwyg } = require("@keystonejs/fields-wysiwyg-tinymce");
 
 const fileAdapter = new LocalFileAdapter({
   src: "./app/public/uploads",
+  path: "/uploads",
 });
 
 // Access control functions
