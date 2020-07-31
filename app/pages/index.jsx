@@ -2,6 +2,7 @@ import React from "react";
 import Head from "next/head";
 import { useAuth } from "providers/auth";
 import { Button } from "components/Button";
+import { Link } from "components/Link";
 
 export default function Home() {
   const { user, logoutUser } = useAuth();
@@ -16,6 +17,7 @@ export default function Home() {
         <span>User Details:</span>
         <pre className="p-2 bg-white">{JSON.stringify(user, null, 2)}</pre>
         <Button onClick={() => logoutUser()}>Log Out</Button>
+        <Link href="/record">Record</Link>
       </div>
     </>
   );
