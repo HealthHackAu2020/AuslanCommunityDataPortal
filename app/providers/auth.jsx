@@ -69,7 +69,7 @@ export const AuthProvider = ({ children }) => {
     setup();
   }, []);
 
-  const { data: user, error, mutate: mutateUser } = useSWR(
+  const { data, error, mutate: mutateUser } = useSWR(
     printGraphql(getAuthenticatedUserQuery)
   );
 
@@ -105,7 +105,12 @@ export const AuthProvider = ({ children }) => {
 
   const isLoginPage = () => router.pathname === "/login";
 
-  if (!user && !isLoginPage()) {
+  if (error || (data && data.authenticatedUser === null)) {
+    logoutUser();
+    return;
+  }
+
+  if (!data && !isLoginPage()) {
     return (
       <div className="h-screen w-screen flex items-center justify-center">
         <Loader className="h-20 w-20" />
@@ -116,7 +121,7 @@ export const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider
       value={{
-        user: user && user.authenticatedUser,
+        user: data && data.authenticatedUser,
         error,
         authenticateUser,
         logoutUser,
