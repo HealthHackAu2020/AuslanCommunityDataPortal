@@ -104,20 +104,20 @@ export const AuthProvider = ({ children }) => {
     window.localStorage.clear();
     updateClientWithToken(null);
     mutateUser(null, false);
-    const loginPage = "/login";
-    if (router.pathname !== loginPage) {
-      router.replace(loginPage);
+    if (!isUnauthenticatedPage()) {
+      router.replace("/login");
     }
   };
 
-  const isLoginPage = () => router.pathname === "/login";
+  const isUnauthenticatedPage = () =>
+    ["/login", "/signup", "/signup/success"].includes(router.pathname);
 
   if (error || (data && data.authenticatedUser === null)) {
     logoutUser();
     return;
   }
 
-  if (!data && !isLoginPage()) {
+  if (!data && !isUnauthenticatedPage()) {
     return (
       <div className="h-screen w-screen flex items-center justify-center">
         <Loader className="h-20 w-20" />

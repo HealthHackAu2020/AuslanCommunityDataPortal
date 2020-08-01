@@ -6,6 +6,7 @@ const {
   Checkbox,
   DateTime,
   Integer,
+  CalendarDay,
   Password,
   Relationship,
   Select,
@@ -59,10 +60,15 @@ exports.User = {
     auth: true,
   },
   fields: {
-    name: { type: Text },
+    name: { type: Text, isRequired: true },
     email: {
       type: Text,
+      isRequired: true,
       isUnique: true,
+    },
+    dateOfBirth: {
+      type: CalendarDay,
+      isRequired: true,
     },
     isAdmin: {
       type: Checkbox,
@@ -78,6 +84,7 @@ exports.User = {
     profile: { type: Wysiwyg },
     password: {
       type: Password,
+      isRequired: true,
     },
     videos: { type: Relationship, ref: "Video.user", many: true },
     comments: { type: Relationship, ref: "Comment.user", many: true },
