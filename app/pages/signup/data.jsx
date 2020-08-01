@@ -2,6 +2,7 @@ import Head from "next/head";
 import { Button } from "components/Button";
 import { Select } from "components/Select";
 import { SignHello } from "components/icons/SignHello";
+import Link from "next/link";
 
 export default function SignUpData() {
   const levelOfAuslanOptions = [
@@ -43,7 +44,11 @@ export default function SignUpData() {
             <Select options={visibilityPermissions} />
 
             <div className="text-center">
-              <Button className="w-full mb-4">Take me to the community</Button>
+              <Link href="/">
+                <Button className="w-full mb-4">
+                  Take me to the community
+                </Button>
+              </Link>
               <span className="text-sm text-gray-600 font-light">
                 Don't worry, you can change your answers later
               </span>

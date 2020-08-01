@@ -10,6 +10,8 @@ import gql from "graphql-tag";
 import { printGraphql } from "utils/gql";
 
 import { useMutation } from "graphql-hooks";
+import { PageWrap } from "components/PageWrap";
+import { Navbar } from "components/Navbar";
 
 const createVideoMutation = gql`
   mutation CreateVideoMutation($translation: String, $file: Upload!) {
@@ -94,32 +96,37 @@ export default () => {
       <Head>
         <title>Record Video</title>
       </Head>
-      <div className="mx-auto container h-screen max-w-md">
-        <H1 className="text-center py-8">Record Videos</H1>
-        <div className="relative pb-1x1">
-          <video
-            className="absolute inset-0 w-full h-full"
-            ref={videoElement}
-            controls
-            autoPlay
-            playsInline
-          ></video>
-        </div>
-        <div className="flex justify-between">
-          <Button onClick={startRecording}>Start Recording</Button>
-          <Button onClick={stopRecording}>Stop Recording</Button>
-        </div>
-        <form
-          className="flex flex-col space-y-1"
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <TextInput
-            name="translation"
-            ref={register}
-            placeholder="Translation"
-          />
-          <Submit value="Submit" />
-        </form>
+
+      {/* Page */}
+      <div className="min-h-screen">
+        <Navbar />
+        <PageWrap>
+          <H1 className="text-center py-8">Record Videos</H1>
+          <div className="relative pb-1x1">
+            <video
+              className="absolute inset-0 w-full h-full"
+              ref={videoElement}
+              controls
+              autoPlay
+              playsInline
+            ></video>
+          </div>
+          <div className="flex justify-between">
+            <Button onClick={startRecording}>Start Recording</Button>
+            <Button onClick={stopRecording}>Stop Recording</Button>
+          </div>
+          <form
+            className="flex flex-col space-y-1"
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <TextInput
+              name="translation"
+              ref={register}
+              placeholder="Translation"
+            />
+            <Submit value="Submit" />
+          </form>
+        </PageWrap>
       </div>
     </>
   );
