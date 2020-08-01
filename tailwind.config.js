@@ -1,6 +1,6 @@
 module.exports = {
   important: true,
-  purge: [],
+  purge: ["./app/**/*.jsx"],
   theme: {
     extend: {
       fontFamily: {
@@ -18,11 +18,11 @@ module.exports = {
       },
       spacing: {
         "1x1": "100%",
-        "3x2": "calc((2/3) * 100)%",
-        "16x9": "calc((9/16) * 100)%",
+        "3x2": "calc(100% * 2/3)",
+        "16x9": "calc(100% * 9/16)",
       },
     },
   },
   variants: {},
-  plugins: [],
+  plugins: [require("@tailwindcss/custom-forms")],
 };

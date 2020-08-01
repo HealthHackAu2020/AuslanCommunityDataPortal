@@ -13,11 +13,15 @@ export default function Home() {
         <title>Auslan Community Portal</title>
       </Head>
       <div className="mx-auto container flex flex-col h-screen items-center justify-center">
-        <h1 className="text-3xl font-bold">Home Page</h1>
-        <span>User Details:</span>
-        <pre className="p-2 bg-white">{JSON.stringify(user, null, 2)}</pre>
-        <Button onClick={() => logoutUser()}>Log Out</Button>
-        <Link href="/record">Record</Link>
+        <h1 className="text-3xl font-bold mb-8">Home Page</h1>
+        {/* <span>User Details:</span>
+        <pre className="p-2 bg-white">{JSON.stringify(user, null, 2)}</pre> */}
+        <div className="flex space-x-4">
+          <Link href="/record">
+            <Button>Record</Button>
+          </Link>
+          <Button onClick={() => logoutUser()}>Log Out</Button>
+        </div>
       </div>
     </>
   );

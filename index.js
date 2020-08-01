@@ -17,6 +17,7 @@ const keystone = new Keystone({
   name: "App",
   adapter: new Adapter(adapterConfig),
   onConnect: initialiseData,
+  cookieSecret: process.env.COOKIE_SECRET,
 });
 
 keystone.createList("User", User);

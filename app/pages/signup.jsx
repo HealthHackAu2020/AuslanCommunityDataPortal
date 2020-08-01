@@ -10,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { printGraphql } from "utils/gql";
 import { useRouter } from "next/router";
 import { useAuth } from "providers/auth";
+import { PageWrap } from "components/PageWrap";
 
 const createUserMutation = gql`
   mutation SignUpUser(
@@ -88,7 +89,10 @@ export default function SignUp() {
         <title>Sign Up | Auslan Community Portal</title>
       </Head>
 
-      <div className="mx-auto p-8 container min-h-screen max-w-md flex flex-col items-center justify-center">
+      <PageWrap
+        noNav
+        className="min-h-screen max-w-md flex flex-col items-center justify-center"
+      >
         <div className="w-full">
           {/* Logo and Header */}
           <div className="flex flex-col items-center">
@@ -154,7 +158,7 @@ export default function SignUp() {
             <Link href="/login">Got an account? Log in!</Link>
           </form>
         </div>
-      </div>
+      </PageWrap>
     </>
   );
 }

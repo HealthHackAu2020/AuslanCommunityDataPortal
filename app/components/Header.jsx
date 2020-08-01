@@ -12,7 +12,7 @@ export const H1 = ({ className, children, ...props }) => {
 
 export const H2 = ({ className, children, ...props }) => {
   return (
-    <h2 className={clsx(baseHeaderClasses, className)} {...props}>
+    <h2 className={clsx("text-xl", baseHeaderClasses, className)} {...props}>
       {children}
     </h2>
   );
@@ -20,7 +20,7 @@ export const H2 = ({ className, children, ...props }) => {
 
 export const H3 = ({ className, children, ...props }) => {
   return (
-    <h3 className={clsx(baseHeaderClasses, className)} {...props}>
+    <h3 className={clsx("text-lg", baseHeaderClasses, className)} {...props}>
       {children}
     </h3>
   );

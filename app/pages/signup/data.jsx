@@ -3,6 +3,7 @@ import { Button } from "components/Button";
 import { Select } from "components/Select";
 import { SignHello } from "components/icons/SignHello";
 import Link from "next/link";
+import { PageWrap } from "components/PageWrap";
 
 export default function SignUpData() {
   const levelOfAuslanOptions = [
@@ -28,7 +29,10 @@ export default function SignUpData() {
         <title>Your Preferences | Auslan Community Portal</title>
       </Head>
 
-      <div className="mx-auto p-4 container min-h-screen flex flex-col items-center justify-center">
+      <PageWrap
+        noNav
+        className="min-h-screen flex flex-col items-center justify-center"
+      >
         <div className="flex flex-col items-center space-y-4 text-center">
           <SignHello className="w-40" />
           <span className="text-xl font-bold">Welcome!</span>
@@ -55,7 +59,7 @@ export default function SignUpData() {
             </div>
           </div>
         </div>
-      </div>
+      </PageWrap>
     </>
   );
 }

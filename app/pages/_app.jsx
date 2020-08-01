@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }) {
       </Head>
 
       {/* Page Render and Providers */}
-      <div className="font-base font-sans tracking-normal leading-normal bg-gray-200 min-h-screen">
+      <div className="font-base font-sans tracking-normal leading-normal min-h-screen">
         <DataProvider>
           <AuthProvider>
             <Component {...pageProps} />

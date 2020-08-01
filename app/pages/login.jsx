@@ -6,6 +6,7 @@ import { TextInput } from "components/TextInput";
 import { Submit } from "components/Button";
 import { Link } from "components/Link";
 import { useAuth } from "providers/auth";
+import { PageWrap } from "components/PageWrap";
 
 export default function Login() {
   const { register, handleSubmit, errors, setError } = useForm();
@@ -27,7 +28,10 @@ export default function Login() {
         <title>Login | Auslan Community Portal</title>
       </Head>
 
-      <div className="mx-auto container h-screen max-w-md flex flex-col items-center justify-center">
+      <PageWrap
+        noNav
+        className="min-h-screen max-w-md flex flex-col items-center justify-center"
+      >
         <div className="w-full">
           {/* Logo and Header */}
           <div className="flex flex-col items-center">
@@ -60,7 +64,7 @@ export default function Login() {
             <Link href="/signup">Haven't got an account? Sign up!</Link>
           </form>
         </div>
-      </div>
+      </PageWrap>
     </>
   );
 }

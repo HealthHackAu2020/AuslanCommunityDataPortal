@@ -24,6 +24,7 @@
     "@keystonejs/auth-password": "^5.1.11",
     "@keystonejs/email": "^5.1.5",
     "@keystonejs/fields": "^14.0.0",
+    "@keystonejs/fields-authed-relationship": "^1.0.8",
     "@keystonejs/fields-wysiwyg-tinymce": "^5.3.3",
     "@keystonejs/file-adapters": "^7.0.2",
     "@keystonejs/keystone": "^12.0.0",
@@ -36,10 +37,12 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-hook-form": "^6.1.2",
+    "react-select": "^3.1.0",
     "recordrtc": "^5.6.1",
     "swr": "^0.2.3"
   },
   "devDependencies": {
+    "@tailwindcss/custom-forms": "^0.2.1",
     "tailwindcss": "^1.5.2"
   }
 }
