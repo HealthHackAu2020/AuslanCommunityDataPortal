@@ -6,9 +6,23 @@ You've created a KeystoneJS project! This project contains a simple list of user
 
 ## Running the Project.
 
-To run this project first run `yarn` to install dependencies.
+### Requirements
 
-Then to run the project locally, run `yarn dev`.
+- Docker
+- NodeJS 12
+
+### Steps
+
+```sh
+# Install all project dependencies
+yarn
+
+# Start database container
+docker-compose up -d
+
+# Run locally.
+yarn dev
+```
 
 Once running, the Admin UI is reachable via `http://localhost:3000/admin`.
 
