@@ -1,61 +1,36 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import { SWRConfig } from "swr";
-import { GraphQLClient } from "graphql-request";
-import { GraphQLClient as HkGQLClient, ClientContext } from "graphql-hooks";
-
-// Data Context
-export const DataContext = React.createContext(null);
-
-// Data Hook
-export const useData = () => useContext(DataContext);
+import { GraphQLClient, ClientContext } from "graphql-hooks";
+import { useContext } from "react";
 
 const GQL_ENDPOINT = `/admin/api`;
 
-export const DataProvider = ({ children }) => {
-  // Initialise the Data Providers
-  const [client, setClient] = useState(new GraphQLClient(GQL_ENDPOINT));
+export const useData = () => useContext(ClientContext);
 
-  const hkClient = new HkGQLClient({
+export const DataProvider = ({ children }) => {
+  const client = new GraphQLClient({
     url: GQL_ENDPOINT,
   });
 
-  const fetcher = async (...args) => client.request(...args);
-
-  const updateClientWithToken = (token) => {
-    const authHeader = token
-      ? {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      : undefined;
-
-    if (token) {
-      hkClient.setHeader("Authorization", `Bearer ${token}`);
-    } else {
-      hkClient.removeHeader("Authorization");
-    }
-
-    const newClient = new GraphQLClient(GQL_ENDPOINT, authHeader);
-    setClient(newClient);
+  const fetcher = async (query, variables) => {
+    const response = await client.request(
+      { query, variables },
+      {
+        skipCache: true,
+      }
+    );
+    return response.data;
   };
 
   return (
-    <ClientContext.Provider value={hkClient}>
-      <DataContext.Provider
+    <ClientContext.Provider value={client}>
+      <SWRConfig
         value={{
-          client,
-          updateClientWithToken,
+          fetcher,
         }}
       >
-        <SWRConfig
-          value={{
-            fetcher,
-          }}
-        >
-          {children}
-        </SWRConfig>
-      </DataContext.Provider>
+        {children}
+      </SWRConfig>
     </ClientContext.Provider>
   );
 };

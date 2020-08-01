@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import useSWR from "swr";
-import { useData } from "./data";
 import gql from "graphql-tag";
 import { useRouter } from "next/router";
 import { printGraphql } from "utils/gql";
 import { Loader } from "components/icons/Loader";
+import { useData } from "./data";
 
 // Auth Context
 export const AuthContext = React.createContext(null);
@@ -16,7 +16,6 @@ export const useAuth = () => useContext(AuthContext);
 const LOCALSTORAGE_KEY = "auth_token";
 
 // GQL Queries
-
 const getAuthenticatedUserQuery = gql`
   query GetAuthenticatedUser {
     authenticatedUser {
@@ -41,8 +40,20 @@ const authenticateUserMutation = gql`
 `;
 
 export const AuthProvider = ({ children }) => {
-  const { client, updateClientWithToken } = useData();
+  const client = useData();
   const router = useRouter();
+
+  const updateClientWithToken = (token) => {
+    if (token) {
+      client.setHeader("Authorization", `Bearer ${token}`);
+    } else {
+      client.removeHeader("Authorization");
+    }
+  };
+
+  const { data, error, mutate: mutateUser } = useSWR(
+    printGraphql(getAuthenticatedUserQuery)
+  );
 
   /**
    * Initialise auth check
@@ -69,20 +80,16 @@ export const AuthProvider = ({ children }) => {
     setup();
   }, []);
 
-  const { data, error, mutate: mutateUser } = useSWR(
-    printGraphql(getAuthenticatedUserQuery)
-  );
-
   const authenticateUser = async (email, password) => {
     try {
-      const response = await client.request(
-        printGraphql(authenticateUserMutation),
-        {
+      const response = await client.request({
+        query: printGraphql(authenticateUserMutation),
+        variables: {
           email,
           password,
-        }
-      );
-      const token = response.authenticateUserWithPassword.token;
+        },
+      });
+      const token = response.data.authenticateUserWithPassword.token;
       updateClientWithToken(token);
       window.localStorage.setItem(LOCALSTORAGE_KEY, token);
       await mutateUser();
