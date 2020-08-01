@@ -6,7 +6,7 @@ export const Button = React.forwardRef(
     return (
       <button
         ref={ref}
-        className={`py-4 px-6 border rounded-full outline-none transition duration-75 focus:shadow-outline ${textClass} ${typeClass} ${className}`}
+        className={`py-4 px-6 border cursor-pointer rounded-full outline-none transition duration-75 focus:shadow-outline ${textClass} ${typeClass} ${className}`}
         {...props}
       >
         {children}
@@ -22,7 +22,7 @@ export const Submit = React.forwardRef(
       <input
         ref={ref}
         type="submit"
-        className={`py-4 px-6 border rounded-full outline-none transition duration-75 focus:shadow-outline ${textClass} ${typeClass} ${className}`}
+        className={`py-4 px-6 cursor-pointer border rounded-full outline-none transition duration-75 focus:shadow-outline ${textClass} ${typeClass} ${className}`}
         value={value}
         {...props}
       />
