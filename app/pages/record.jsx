@@ -20,7 +20,7 @@ import { TextArea } from "components/TextInput";
 import { RadioInput } from "components/TextInput";
 import { handShapes, locations, movements } from "utils/sign";
 
-import Select from "react-select";
+import { AutoComplete } from "components/Autocomplete";
 
 const createVideoMutation = gql`
   mutation CreateVideoRecord(
@@ -69,7 +69,9 @@ export default function RecordPage() {
     }
   };
 
-  const [createVideo] = useMutation(printGraphql(createVideoMutation));
+  const [createVideo, { loading }] = useMutation(
+    printGraphql(createVideoMutation)
+  );
 
   const startRecording = async () => {
     try {
@@ -219,13 +221,13 @@ export default function RecordPage() {
               <label className="block mb-3">What is your dominant hand?</label>
               <div className="space-y-2">
                 <RadioInput
-                  ref={register}
+                  ref={register({ required: true })}
                   value="left"
                   label="Left-handed"
                   name="dominantHand"
                 />
                 <RadioInput
-                  ref={register}
+                  ref={register({ required: true })}
                   value="right"
                   label="Right-handed"
                   name="dominantHand"
@@ -235,9 +237,8 @@ export default function RecordPage() {
 
             <div>
               <label htmlFor="handshapes">Handshapes:</label>
-              <Controller
+              <AutoComplete
                 id="handshapes"
-                as={<Select />}
                 control={control}
                 name="handshapes"
                 placeholder="Handshapes"
@@ -247,12 +248,11 @@ export default function RecordPage() {
             </div>
 
             <div>
-              <label htmlFor="location">Locations:</label>
-              <Controller
-                id="location"
-                as={<Select />}
+              <label htmlFor="locations">Locations:</label>
+              <AutoComplete
+                id="locations"
                 control={control}
-                name="location"
+                name="locations"
                 placeholder="Locations"
                 options={locations}
                 isMulti
@@ -261,8 +261,7 @@ export default function RecordPage() {
 
             <div>
               <label htmlFor="movements">Movements:</label>
-              <Controller
-                as={<Select />}
+              <AutoComplete
                 id="movements"
                 control={control}
                 name="movements"
@@ -272,7 +271,7 @@ export default function RecordPage() {
               />
             </div>
 
-            <Submit value="Submit" />
+            <Submit value="Submit" loading={loading} />
           </form>
         </PageWrap>
       </div>

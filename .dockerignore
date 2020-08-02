@@ -1,0 +1,6 @@
+ci
+infra
+**/node_modules/**
+.mbt.yml
+docker-compose*
+!.env.*

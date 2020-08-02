@@ -1,4 +1,5 @@
 import React from "react";
+import clsx from "clsx";
 
 export const Button = React.forwardRef(
   ({ className, color, children, ...props }, ref) => {
@@ -16,14 +17,21 @@ export const Button = React.forwardRef(
 );
 
 export const Submit = React.forwardRef(
-  ({ className, color, value, ...props }, ref) => {
+  ({ className, color, value, loading, ...props }, ref) => {
     let { textClass, typeClass } = buttonColorClass(color);
     return (
       <input
         ref={ref}
         type="submit"
-        className={`py-4 px-6 cursor-pointer border rounded-full outline-none transition duration-75 focus:shadow-outline ${textClass} ${typeClass} ${className}`}
-        value={value}
+        className={clsx(
+          "py-4 px-6 cursor-pointer border rounded-full outline-none transition duration-75 focus:shadow-outline",
+          loading && "opacity-75",
+          textClass,
+          typeClass,
+          className
+        )}
+        value={loading ? "Loading..." : value}
+        disabled={loading}
         {...props}
       />
     );

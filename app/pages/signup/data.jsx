@@ -53,9 +53,17 @@ export default function SignUpData() {
                   Take me to the community
                 </Button>
               </Link>
-              <span className="text-sm text-gray-600 font-light">
-                Don't worry, you can change your answers later
-              </span>
+              <div className="text-sm text-gray-600 font-light">
+                <span>Don't worry, you can change your answers later.</span>
+                <span>
+                  By using our service, you agree that you're okay with our{" "}
+                  <Link href="/tandc">
+                    <a target="_blank" className="underline">
+                      terms and conditions.
+                    </a>
+                  </Link>
+                </span>
+              </div>
             </div>
           </div>
         </div>

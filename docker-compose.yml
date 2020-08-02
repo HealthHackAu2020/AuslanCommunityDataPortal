@@ -8,5 +8,12 @@ services:
     volumes:
       - db:/data/db
 
+  web:
+    build: .
+    ports:
+      - "3002:3000"
+    depends_on:
+      - mongo
+
 volumes:
   db: ~

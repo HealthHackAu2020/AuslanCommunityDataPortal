@@ -11,9 +11,12 @@ const {
   Relationship,
   Select,
   Text,
-  Virtual,
 } = require("@keystonejs/fields");
-const gql = require("graphql-tag");
+
+const { Virtual } = require("@keystonejs/fields");
+
+// const gql = require("graphql-tag");
+const { atTracking } = require("@keystonejs/list-plugins");
 
 const { LocalFileAdapter } = require("@keystonejs/file-adapters");
 const { Wysiwyg } = require("@keystonejs/fields-wysiwyg-tinymce");
@@ -130,9 +133,10 @@ exports.User = {
     // comments: { type: Relationship, ref: "Comment.user", many: true },
     // ratings: { type: Relationship, ref: "Rating.user", many: true },
   },
+  plugins: [atTracking()],
 };
 
-const videoRatingsQuery = gql`
+const videoRatingsQuery = `
   query AllVideoRatings($id: ID!) {
     allRatings(where: { video: { id: $id } }) {
       correctness
@@ -183,6 +187,7 @@ exports.Video = {
       },
     },
   },
+  plugins: [atTracking()],
 };
 
 exports.Comment = {
@@ -192,6 +197,7 @@ exports.Comment = {
     user: { type: AuthedRelationship, ref: "User", isRequired: true },
     video: { type: Relationship, ref: "Video.comments", isRequired: true },
   },
+  plugins: [atTracking()],
 };
 
 const ratingOptions = [
@@ -219,4 +225,5 @@ exports.Rating = {
     user: { type: AuthedRelationship, ref: "User", isRequired: true },
     video: { type: Relationship, ref: "Video.ratings", isRequired: true },
   },
+  plugins: [atTracking()],
 };

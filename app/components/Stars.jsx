@@ -13,7 +13,10 @@ export const Stars = ({ className, rating, max = 5 }) => {
       {stars.map((i) => (
         <StarIcon
           key={i}
-          className={clsx("h-5 w-5", i <= rounded && "fill-current")}
+          className={clsx(
+            "h-5 w-5 fill-current",
+            i > rounded && "text-gray-400"
+          )}
         />
       ))}
     </div>
@@ -45,7 +48,12 @@ export const StarInput = ({
             className="appearance-none hidden"
             onChange={() => onChange(i)}
           />
-          <StarIcon className={clsx("h-5 w-5", i <= value && "fill-current")} />
+          <StarIcon
+            className={clsx(
+              "h-5 w-5 fill-current",
+              (i > value || !value) && "text-gray-400"
+            )}
+          />
           <span className="sr-only">{i} Stars</span>
         </label>
       ))}

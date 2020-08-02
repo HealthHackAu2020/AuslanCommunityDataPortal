@@ -11,7 +11,7 @@ const { User, Comment, Rating, Video } = require("./schema");
 const { MongooseAdapter: Adapter } = require("@keystonejs/adapter-mongoose");
 
 const PROJECT_NAME = "Auslan Community";
-const adapterConfig = { mongoUri: "mongodb://localhost:27017/keystone" };
+const adapterConfig = { mongoUri: process.env.MONGO_URL };
 
 const keystone = new Keystone({
   name: "App",
